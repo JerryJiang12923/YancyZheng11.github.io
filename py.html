@@ -20,7 +20,7 @@
  import json
 
  timestamp = str(round(time.time() * 1000))
- secret = 'this is secret'
+ secret = 'SEC03f98d9b74fb62f7c2ccae560ae2e11a6b80667483a4ace47a77d65f36860340'
  secret_enc = secret.encode('utf-8')
  string_to_sign = '{}\n{}'.format(timestamp, secret)
  string_to_sign_enc = string_to_sign.encode('utf-8')
