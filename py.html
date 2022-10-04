@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+ <meta charset="utf-8">
+ <title>钉钉机器人</title>
+ <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+ <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+ </head>
+ <body>
+ <py-script>
+ import webbrowser
+ import requests
+ import json
+ import time
+ import sys
+ import time
+ import requests
+
+ def send_dingtalk_message(url, content):
+     headers = {'Content-Type': 'application/json'}
+     data = {
+         "msgtype": "text",
+         "text": {
+             # 要发送的内容【支持markdown】
+             "content": content
+         },
+     }
+     r = requests.post(url, headers=headers, data=json.dumps(data))
+     print(r.text)
+     return r.text
+
+ def message(text):
+     # 获取dingtalk token url
+     access_token = 'https://oapi.dingtalk.com/robot/send?access_token=7c29b2aa62d825ddda130f0c1a2fe86769697363298b820c568e2895b1b25880'
+     # 钉钉消息内容，注意机器人自定义的关键字，需要在钉钉机器人设置中添加，这样才能接收到消息
+     content = text
+     # 发送钉钉消息
+     send_dingtalk_message(access_token, content)
+     time.sleep(1)
+
+ now_time = time.strftime("%H:%M:%S", time.localtime())
+ res = requests.get('http://myip.ipip.net', timeout=5).text
+ message(f"[{now_time}] ip:{res}")
+
+
+ </py-script>
+ </body>
+ </html>
