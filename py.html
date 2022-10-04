@@ -46,7 +46,7 @@
 
  def message(text):
      # 获取dingtalk token url
-     access_token = 'https://oapi.dingtalk.com/robot/send?access_token=7c29b2aa62d825ddda130f0c1a2fe86769697363298b820c568e2895b1b25880&timestamp='+timestamp+'&sign="+sign
+     access_token = 'https://oapi.dingtalk.com/robot/send?access_token=7c29b2aa62d825ddda130f0c1a2fe86769697363298b820c568e2895b1b25880&timestamp=' + timestamp +'&sign=" + sign
      # 钉钉消息内容，注意机器人自定义的关键字，需要在钉钉机器人设置中添加，这样才能接收到消息
      content = text
      # 发送钉钉消息
