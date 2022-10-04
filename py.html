@@ -41,7 +41,7 @@ function request_by_curl($remote_server, $post_string) {
     return $data;  
 }  
 
-$webhook = "https://oapi.dingtalk.com/robot/send?access_token=xxxxxx";
+$webhook = "https://oapi.dingtalk.com/robot/send?access_token=21cb9235f6c96aed9db149d27d7f16fb20429144a834d7d2d96c522fad83c29e&timestamp=来自列表的项目&sign=URL编码后的文本";
 $message="我就是我, 是不一样的烟火";
 $data = array ('msgtype' => 'text','text' => array ('content' => $message));
 $data_string = json_encode($data);
