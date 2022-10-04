@@ -17,6 +17,7 @@
  import base64
  import urllib.parse
  import requests
+ import json
 
  timestamp = str(round(time.time() * 1000))
  secret = 'this is secret'
@@ -51,7 +52,7 @@
      # 发送钉钉消息
      send_dingtalk_message(access_token, content)
      time.sleep(1)
-
+     print("success")
  </py-script>
  </body>
  </html>
