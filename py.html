@@ -11,48 +11,47 @@
  </head>
  <body>
  <py-script>
- import time
- import hmac
- import hashlib
- import base64
- import urllib.parse
- import requests
- import json
+  import time
+  import hmac
+  import hashlib
+  import base64
+  import urllib.parse
+  import webbrowser
+  import requests
+  import json
 
- timestamp = str(round(time.time() * 1000))
- secret = 'SEC03f98d9b74fb62f7c2ccae560ae2e11a6b80667483a4ace47a77d65f36860340'
- secret_enc = secret.encode('utf-8')
- string_to_sign = '{}\n{}'.format(timestamp, secret)
- string_to_sign_enc = string_to_sign.encode('utf-8')
- hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()
- sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
- print(timestamp)
- print(sign)
+  timestamp = str(round(time.time() * 1000))
+  secret = 'SEC03f98d9b74fb62f7c2ccae560ae2e11a6b80667483a4ace47a77d65f36860340'
+  secret_enc = secret.encode('utf-8')
+  string_to_sign = '{}\n{}'.format(timestamp, secret)
+  string_to_sign_enc = string_to_sign.encode('utf-8')
+  hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()
+  sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
+  print(timestamp)
+  print(sign)
  
+  def send_dingtalk_message(url, content):
+      headers = {'Content-Type': 'application/json'}
+      data = {
+          "msgtype": "text",
+          "text": {
+              # 要发送的内容【支持markdown】
+              "content": "test"
+          },
+      }
+      r = requests.post(url, headers=headers, data=json.dumps(data))
+      print(r.text)
+      return r.text
 
-
- def send_dingtalk_message(url, content):
-     headers = {'Content-Type': 'application/json'}
-     data = {
-         "msgtype": "text",
-         "text": {
-             # 要发送的内容【支持markdown】
-             "content": "test"
-         },
-     }
-     r = requests.post(url, headers=headers, data=json.dumps(data))
-     print(r.text)
-     return r.text
-
- def message(text):
-     # 获取dingtalk token url
-     access_token = 'https://oapi.dingtalk.com/robot/send?access_token=7c29b2aa62d825ddda130f0c1a2fe86769697363298b820c568e2895b1b25880&timestamp=' + timestamp +'&sign=' + sign
-     # 钉钉消息内容，注意机器人自定义的关键字，需要在钉钉机器人设置中添加，这样才能接收到消息
-     content = text
-     # 发送钉钉消息
-     send_dingtalk_message(access_token, content)
-     time.sleep(1)
-     print("success")
+  def message(text):
+      # 获取dingtalk token url
+      access_token = 'https://oapi.dingtalk.com/robot/send?access_token=7c29b2aa62d825ddda130f0c1a2fe86769697363298b820c568e2895b1b25880&timestamp=' + timestamp +'&sign=' + sign
+      # 钉钉消息内容，注意机器人自定义的关键字，需要在钉钉机器人设置中添加，这样才能接收到消息
+      content = text
+      # 发送钉钉消息
+      send_dingtalk_message(access_token, content)
+      time.sleep(1)
+      print("success")
  </py-script>
  </body>
  </html>
