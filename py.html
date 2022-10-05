@@ -7,7 +7,7 @@
  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
  <py-env>
   - requests
-  - openssl
+  - libssl
  </py-env>
  </head>
  <body>
@@ -17,10 +17,9 @@
   import hashlib
   import base64
   import urllib.parse
-  import webbrowser
   import requests
   import json
-  from pyodide.http import pyfetch, FetchResponse
+  import libssl
   
   timestamp = str(round(time.time() * 1000))
   secret = 'SEC03f98d9b74fb62f7c2ccae560ae2e11a6b80667483a4ace47a77d65f36860340'
@@ -41,8 +40,7 @@
                "content": content
            },
        }
-      r = await pyfetch(url, method="POST", headers=headers, data=json.dumps(data))
-      # r = requests.post(url, headers=headers, data=json.dumps(data))
+      r = requests.post(url, headers=headers, data=json.dumps(data))
       print(r.text)
       return r.text()
 
