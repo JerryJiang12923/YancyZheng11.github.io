@@ -21,10 +21,6 @@
   import requests
   import json
   from pyodide.http import pyfetch, FetchResponse
-
-response = await pyfetch(url, method="GET", headers=headers)
-
-data_dict = await response.json()
   
   timestamp = str(round(time.time() * 1000))
   secret = 'SEC03f98d9b74fb62f7c2ccae560ae2e11a6b80667483a4ace47a77d65f36860340'
@@ -48,7 +44,7 @@ data_dict = await response.json()
       r = await pyfetch(url, method="POST", headers=headers, data=json.dumps(data))
       # r = requests.post(url, headers=headers, data=json.dumps(data))
       print(r.text)
-      return r.text
+      return r.text()
 
   def message(text):
       # 获取dingtalk token url
