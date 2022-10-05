@@ -29,14 +29,13 @@
   sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
   print(timestamp)
   print(sign)
- 
+  
   def send_dingtalk_message(url, content):
       headers = {'Content-Type': 'application/json'}
-      data = {
+        data = {
           "msgtype": "text",
           "text": {
-              # 要发送的内容【支持markdown】
-              "content": "test"
+              "content": content
           },
       }
       r = requests.post(url, headers=headers, data=json.dumps(data))
@@ -47,6 +46,7 @@
       # 获取dingtalk token url
       access_token = 'https://oapi.dingtalk.com/robot/send?access_token=21cb9235f6c96aed9db149d27d7f16fb20429144a834d7d2d96c522fad83c29e&timestamp=' + timestamp +'&sign=' + sign
       # 钉钉消息内容，注意机器人自定义的关键字，需要在钉钉机器人设置中添加，这样才能接收到消息
+      text = "testttt"
       content = text
       # 发送钉钉消息
       send_dingtalk_message(access_token, content)
