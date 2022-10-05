@@ -32,12 +32,13 @@
   
   def send_dingtalk_message(url, content):
       headers = {'Content-Type': 'application/json'}
-        data = {
-          "msgtype": "text",
-          "text": {
-              "content": content
-          },
-      }
+      data = {
+           "msgtype": "text",
+           "text": {
+               # 要发送的内容【支持markdown】
+               "content": content
+           },
+       }
       r = requests.post(url, headers=headers, data=json.dumps(data))
       print(r.text)
       return r.text
