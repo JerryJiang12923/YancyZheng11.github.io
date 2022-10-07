@@ -17,7 +17,7 @@
   import pyodide.http
   
   async def send_dingtalk_message(url, content):
-      print("url")
+      print(url)
       headers = {'Content-Type': 'application/json'}
       data = {
            "msgtype": "text",
@@ -26,7 +26,7 @@
            },
        }
       resp = await pyodide.http.pyfetch(url, method="POST", body=json.dumps(data), headers=headers)
-      print("resp")
+      print(resp)
       r = await resp.json()
       return r.text()
 
