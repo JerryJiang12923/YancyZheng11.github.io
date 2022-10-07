@@ -27,7 +27,7 @@
   print(timestamp)
   print(sign)
   
-  def send_dingtalk_message(url, content):
+  async def send_dingtalk_message(url, content):
       headers = {'Content-Type': 'application/json'}
       data = {
            "msgtype": "text",
