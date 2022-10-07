@@ -37,7 +37,6 @@
        }
       resp = await pyodide.http.pyfetch(url, method="POST", body=json.dumps(data), headers=headers)
       r = await resp.json()
-      print(r.text)
       return r.text()
 
   async def message(text):
@@ -46,7 +45,8 @@
       # 钉钉消息内容，注意机器人自定义的关键字，需要在钉钉机器人设置中添加，这样才能接收到消息
       content = text
       # 发送钉钉消息
-      await send_dingtalk_message(access_token, content)
+      fResult = await send_dingtalk_message(access_token, content)
+      print(fResult)
       print("success")
   
   message("text")
