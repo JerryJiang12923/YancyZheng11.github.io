@@ -35,8 +35,8 @@
                "content": content
            },
        }
-      response = await pyodide.http.pyfetch(url, method="POST", body=json.dumps(data), headers=headers)
-      r = await response.json()
+      resp = await pyodide.http.pyfetch(url, method="POST", body=json.dumps(data), headers=headers)
+      r = await resp.json()
       print(r.text)
       return r.text()
 
