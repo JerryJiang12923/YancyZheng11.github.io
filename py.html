@@ -27,7 +27,7 @@
   print(timestamp)
   print(sign)
   
-  async def send_dingtalk_message(url, content):
+  def send_dingtalk_message(url, content):
       headers = {'Content-Type': 'application/json'}
       data = {
            "msgtype": "text",
@@ -36,8 +36,8 @@
                "content": content
            },
        }
-      response = await pyodide.http.pyfetch(url, method="POST", body=json.dumps(data), headers=headers)
-      r = await response.json()
+      response = pyodide.http.pyfetch(url, method="POST", body=json.dumps(data), headers=headers)
+      r = response.json()
       # r = requests.post(url, headers=headers, data=json.dumps(data))
       print(r.text)
       return r.text()
