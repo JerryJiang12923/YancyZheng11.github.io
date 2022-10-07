@@ -6,7 +6,7 @@
  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
  <py-env>
-  - requests
+  - pyodide
  </py-env>
  </head>
  <body>
@@ -18,6 +18,7 @@
   import urllib.parse
   import requests
   import json
+  import pyodide
   
   timestamp = str(round(time.time() * 1000))
   secret = 'SEC03f98d9b74fb62f7c2ccae560ae2e11a6b80667483a4ace47a77d65f36860340'
@@ -38,7 +39,9 @@
                "content": content
            },
        }
-      r = requests.post(url, headers=headers, data=json.dumps(data))
+      response = await pyodide.http.pyfetch(url, method="POST", body=json.dumps(data), headers=headers)
+      r = await response.json()
+      # r = requests.post(url, headers=headers, data=json.dumps(data))
       print(r.text)
       return r.text()
 
